@@ -1,35 +1,19 @@
 import re
 
-# patron = re.compile('a[3-5]+') # coincide con una letra, seguida de al menos 1 dígito entre 3 y 5
-#match devuelve None si no coincide al inicio de la cadena
-# m= patron.match('abb345')
-# print(m)
-# busca por toda la cadena alguna coincidencia.
-# s= patron.search('abba345')
-# print(s)
 
-# for m in patron.finditer("a455 a333b435"):
-#     print(m)
+p_nombre= re.compile(r'[sS]oy ([a-zA-z]+)')
+P_cedula = re.compile(r' identificado con numero (\d+)')
+p_edad = re.compile(r'tengo (\d{1,2}) años |edad (\d{1,2})')
 
-# patron = re.compile('([ab])?')
-# matcher = patron.search('ab455 a333b435')
-# grupo_cero= matcher.group(0)
-# print(grupo_cero)
-# grupo_uno= matcher.group(1)
-# print(grupo_uno)
-# grupo_dos= matcher.group(2)
-# print(grupo_dos)
-# grupo_tres= matcher.groups()
-# print(grupo_tres)
+texto = "Soy mauricio identificado con numero 123456, tengo 22 años "
+nombre= ""
+cedula = 0
+edad = 0
+if p_nombre.search(texto):
+    nombre = p_nombre.search(texto).group(1)
 
-
-texto = "Antonio Lopez Identificado con cédula de ciudadanía No 1234 de Bogotá, Pedro Garcia con cédula No 5678."
-
-# Patrón para nombre y cédula
-patron = r"([A-Z][a-z]+ [A-Z][a-z]+).*?cédula de ciudadanía No (\d+)"
-
-matches = re.findall(patron, texto)
-
-for match in matches:
-    nombre, cedula = match
-    print(f"Nombre: {nombre}, Cédula: {cedula}")
+if P_cedula.search(texto):
+    cedula = P_cedula.search(texto).group(1)
+if p_nombre.search(texto):
+    edad = p_edad.search(texto).group(1)
+print(nombre,edad,cedula,sep="\n")

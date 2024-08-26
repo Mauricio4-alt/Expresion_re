@@ -1,19 +1,21 @@
 import re
 
+# Compilando las expresiones regulares
+p_nombre = re.compile(r'([A-Za-z]+(?:\s[A-Za-z]+)?)(?=\s+identificado| con el numero)')
 
-p_nombre= re.compile(r'[sS]oy ([a-zA-z]+)')
-P_cedula = re.compile(r' identificado con numero (\d+)')
-p_edad = re.compile(r'tengo (\d{1,2}) años |edad (\d{1,2})')
+# Ejemplos de textos
+texto1 = "Soy Mauricio identificado con numero 123456, tengo 22 años "
+texto2 = "Mauricio Urdaneta identificado con cedula 123456 con 22 años de edad"
 
-texto = "Soy mauricio identificado con numero 123456, tengo 22 años "
-nombre= ""
-cedula = 0
-edad = 0
-if p_nombre.search(texto):
-    nombre = p_nombre.search(texto).group(1)
+# Buscando en los textos
+coincide_nombre1 = p_nombre.search(texto1)
+coincide_nombre2 = p_nombre.search(texto2)
 
-if P_cedula.search(texto):
-    cedula = P_cedula.search(texto).group(1)
-if p_nombre.search(texto):
-    edad = p_edad.search(texto).group(1)
-print(nombre,edad,cedula,sep="\n")
+# Extrayendo y mostrando los nombres
+if coincide_nombre1:
+    nombre1 = coincide_nombre1.group(1).strip()
+    print(f"Nombre en texto1: {nombre1}")
+
+if coincide_nombre2:
+    nombre2 = coincide_nombre2.group(1).strip()
+    print(f"Nombre en texto2: {nombre2}")

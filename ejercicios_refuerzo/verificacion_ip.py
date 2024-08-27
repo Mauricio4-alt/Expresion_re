@@ -1,10 +1,14 @@
 import re
 
-exp =r"[0-2][0-9][]\.\.\."
-ip ="192.168.01"
+exp =r"^(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]?[0-9])\."\
+     r"(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]?[0-9])\."\
+     r"(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]?[0-9])\."\
+     r"(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]?[0-9])$"
+ip ="01.168.0.1"
 
-result = re.findall(exp,ip)
+result = re.search(exp,ip)
 if result:
-    print(result)
+    print(f"La ip {result.group()} es válida")
 else:
-    print("esa no es una dirección ip")
+    print(f"La ip {ip} no es válida")
+
